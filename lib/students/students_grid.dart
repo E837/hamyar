@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hamyar/student_card.dart';
+import 'package:hamyar/students/student_card.dart';
 
 class StudentsGrid extends StatelessWidget {
   const StudentsGrid({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class StudentsGrid extends StatelessWidget {
         childAspectRatio: 2 / 3,
       ),
       itemCount: 21,
-      itemBuilder: (context, index) => const Student(),
+      itemBuilder: (context, index) => const StudentCard(),
     );
   }
 }
