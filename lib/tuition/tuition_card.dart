@@ -40,6 +40,7 @@ class _TuitionCardState extends State<TuitionCard> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+      shadowColor: Theme.of(context).colorScheme.primary,
       child: LayoutBuilder(
         builder: (context, constraints) => Padding(
           padding: const EdgeInsets.all(8.0),

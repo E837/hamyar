@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hamyar/main_menu.dart';
+import 'package:hamyar/notes/notes_screen.dart';
 import 'package:hamyar/roll_call/roll_call_screen.dart';
 import 'package:hamyar/students/students_screen.dart';
 import 'package:hamyar/tuition/tuition_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         StudentsScreen.routeName: (ctx) => const StudentsScreen(),
         RollCallScreen.routeName: (ctx) => const RollCallScreen(),
         TuitionScreen.routeName: (ctx) => const TuitionScreen(),
+        NotesScreen.routeName: (ctx) => const NotesScreen(),
       },
     );
   }

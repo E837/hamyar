@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hamyar/notes/notes_screen.dart';
 
 import 'menu_item.dart';
 import './students/students_screen.dart';
@@ -78,7 +79,7 @@ class MenuItems extends StatelessWidget {
                 color: Colors.indigo,
                 title: 'Notes',
                 icon: Icons.sticky_note_2,
-                route: StudentsScreen.routeName,
+                route: NotesScreen.routeName,
               ),
             ),
           ],
