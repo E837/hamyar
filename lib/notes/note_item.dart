@@ -1,38 +1,7 @@
 import 'package:flutter/material.dart';
 
-class NoteItem extends StatefulWidget {
+class NoteItem extends StatelessWidget {
   const NoteItem({Key? key}) : super(key: key);
-
-  @override
-  State<NoteItem> createState() => _NoteItemState();
-}
-
-class _NoteItemState extends State<NoteItem> {
-  final TextEditingController controller = TextEditingController();
-
-  Widget showMultiplierButton(
-      BuildContext context, String text, double height, double width,
-      {bool isButton = true}) {
-    return GestureDetector(
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          borderRadius:
-              isButton ? BorderRadius.circular(30) : BorderRadius.circular(5),
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Theme.of(context).canvasColor,
-          ),
-        ),
-      ),
-      onTap: () {},
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
