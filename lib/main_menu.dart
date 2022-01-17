@@ -4,6 +4,7 @@ import 'menu_item.dart';
 import './students/students_screen.dart';
 import './overal_widgets/title_bar.dart';
 import 'package:hamyar/roll_call/roll_call_screen.dart';
+import 'package:hamyar/tuition/tuition_screen.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -69,7 +70,7 @@ class MenuItems extends StatelessWidget {
                 color: Colors.red,
                 title: 'Tuition',
                 icon: Icons.monetization_on,
-                route: StudentsScreen.routeName,
+                route: TuitionScreen.routeName,
               ),
             ),
             Expanded(
