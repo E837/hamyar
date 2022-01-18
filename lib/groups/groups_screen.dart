@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'students_grid.dart';
 import '../overal_widgets/title_bar.dart';
+import 'package:hamyar/groups/groups_grid.dart';
 
-class StudentsScreen extends StatelessWidget {
-  static const routeName = '/students-screen';
+class GroupsScreen extends StatelessWidget {
+  static const routeName = '/groups-screen';
 
-  const StudentsScreen({Key? key}) : super(key: key);
+  const GroupsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,15 @@ class StudentsScreen extends StatelessWidget {
                   hasBackOption: true,
                 ),
                 const SizedBox(height: 20),
-                const Expanded(child: StudentsGrid()),
+                const Expanded(
+                  child: GroupsGrid(),
+                ),
               ],
             ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () {},
           ),
         ),
       ),

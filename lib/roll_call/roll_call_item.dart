@@ -24,9 +24,11 @@ class _RollCallItemState extends State<RollCallItem> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Icon(
-              Icons.account_circle,
+              checked ? Icons.file_download_done : Icons.account_circle,
               size: 40,
-              color: Theme.of(context).colorScheme.primary,
+              color: checked
+                  ? Colors.green
+                  : Theme.of(context).colorScheme.primary,
             ),
             const Text(
               'Student\'s name',

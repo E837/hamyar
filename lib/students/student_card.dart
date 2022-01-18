@@ -7,14 +7,15 @@ class StudentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        shadowColor: Theme.of(context).colorScheme.primary,
-        elevation: 5,
-        margin: const EdgeInsets.all(8.0),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      shadowColor: Theme.of(context).colorScheme.primary,
+      elevation: 5,
+      margin: const EdgeInsets.all(8.0),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
@@ -29,8 +30,8 @@ class StudentCard extends StatelessWidget {
             ContactButtons(),
           ],
         ),
+        onTap: () => push(context),
       ),
-      onTap: () => push(context),
     );
   }
 

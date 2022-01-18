@@ -6,6 +6,7 @@ import 'package:hamyar/roll_call/roll_call_screen.dart';
 import 'package:hamyar/students/students_screen.dart';
 import 'package:hamyar/tuition/tuition_screen.dart';
 import 'package:hamyar/general_info/general_info_screen.dart';
+import 'package:hamyar/groups/groups_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         TuitionScreen.routeName: (ctx) => const TuitionScreen(),
         NotesScreen.routeName: (ctx) => const NotesScreen(),
         GeneralInfoScreen.routeName: (ctx) => const GeneralInfoScreen(),
+        GroupsScreen.routeName: (ctx) => const GroupsScreen(),
       },
     );
   }
