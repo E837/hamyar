@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hamyar/notes/notes_screen.dart';
 
 import 'menu_item.dart';
 import './students/students_screen.dart';
 import './overal_widgets/title_bar.dart';
 import 'package:hamyar/roll_call/roll_call_screen.dart';
 import 'package:hamyar/tuition/tuition_screen.dart';
+import 'package:hamyar/general_info/general_info_screen.dart';
+import 'package:hamyar/notes/notes_screen.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -88,7 +89,7 @@ class MenuItems extends StatelessWidget {
           color: Colors.green,
           title: 'General info',
           icon: Icons.insert_chart,
-          route: StudentsScreen.routeName,
+          route: GeneralInfoScreen.routeName,
         ),
         const MenuItem(
           color: Colors.brown,

@@ -10,6 +10,7 @@ class StudentDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
     return Theme(
       data: ThemeData(
         primarySwatch: color,
@@ -19,12 +20,11 @@ class StudentDetailsScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('student\'s details'),
           ),
-          body: SizedBox(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CircleAvatar(
+          body: ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(deviceSize.height * 0.03),
+                child: CircleAvatar(
                   radius: 60,
                   child: Icon(
                     Icons.account_circle,
@@ -33,64 +33,71 @@ class StudentDetailsScreen extends StatelessWidget {
                   ),
                   // todo: set a button here to add image from gallery or camera
                 ),
-                const Text('student\'s name'),
-                Column(
+              ),
+              const Text(
+                'student\'s name',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: deviceSize.height * 0.02),
+              Column(
+                children: const [
+                  Text('last presence: 4th of January'),
+                  Text('last payment: 1st of December'),
+                ],
+              ),
+              Container(
+                margin:
+                    EdgeInsets.symmetric(vertical: deviceSize.height * 0.03),
+                width: double.infinity,
+                height: 50,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text('last presence: 4th of January'),
-                    Text('last payment: 1st of December'),
+                    Expanded(
+                      child: ContactButtons(),
+                      flex: 3,
+                    ),
+                    SizedBox(width: 20),
+                    Text('|'),
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: Text(
+                        'contact!',
+                        textAlign: TextAlign.center,
+                      ),
+                      flex: 2,
+                    ),
                   ],
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Expanded(
-                        child: ContactButtons(),
-                        flex: 3,
-                      ),
-                      SizedBox(width: 20),
-                      Text('|'),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Text(
-                          'contact!',
-                          textAlign: TextAlign.center,
-                        ),
-                        flex: 2,
-                      ),
-                    ],
+              ),
+              Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 150,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Center(child: Text('roll call chart')),
                   ),
-                ),
-                Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 150,
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Center(child: Text('roll call chart')),
+                  const SizedBox(height: 20),
+                  Container(
+                    width: double.infinity,
+                    height: 150,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    const SizedBox(height: 20),
-                    Container(
-                      width: double.infinity,
-                      height: 150,
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Center(child: Text('tuition chart')),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                    child: const Center(child: Text('tuition chart')),
+                  ),
+                ],
+              ),
+              SizedBox(height: deviceSize.height * 0.02),
+            ],
           ),
         ),
       ),
