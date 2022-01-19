@@ -19,12 +19,18 @@ class MainMenu extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: Column(
-            children: const [
+            children: [
               TitleBar(
                 title: 'Hamyar',
                 hasBackOption: false,
+                buttons: {
+                  Icons.dark_mode: () {},
+                  Icons.menu: () {},
+                  Icons.add: () {},
+                  Icons.delete: () {},
+                },
               ),
-              Expanded(
+              const Expanded(
                 child: MenuItems(),
               ),
             ],

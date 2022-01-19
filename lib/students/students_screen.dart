@@ -26,6 +26,10 @@ class StudentsScreen extends StatelessWidget {
                 TitleBar(
                   title: title,
                   hasBackOption: true,
+                  buttons: {
+                    Icons.add: () {},
+                    Icons.highlight_off: () {},
+                  },
                 ),
                 const SizedBox(height: 20),
                 const Expanded(child: StudentsGrid()),

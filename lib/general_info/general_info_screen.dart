@@ -25,6 +25,11 @@ class GeneralInfoScreen extends StatelessWidget {
                 TitleBar(
                   title: title,
                   hasBackOption: true,
+                  buttons: {
+                    Icons.settings: () {},
+                    Icons.crop: () {},
+                    Icons.person: () {},
+                  },
                 ),
                 const SizedBox(height: 20),
                 Expanded(
