@@ -1,4 +1,6 @@
-List<String> students = [
+import 'models/student.dart';
+
+List<String> studentNames = [
   'Alice Wilkerson',
   'Fynn Chambers',
   'Cain Guy',
@@ -20,4 +22,22 @@ List<String> students = [
   'Ace Hyde',
   'Davina Roberts',
   'Willie Sykes',
+];
+
+List<Student> students = [
+  Student(
+    phone: {'mobile': '09123456789'},
+    name: 'Alice Wilkerson',
+    joinDate: DateTime.now(),
+  ),
+  Student(
+    phone: {'mobile': '09123456789'},
+    name: 'Fynn Chambers',
+    joinDate: DateTime.now(),
+  ),
+  Student(
+    phone: {'mobile': '09123456789'},
+    name: 'Cain Guy',
+    joinDate: DateTime.now(),
+  ),
 ];

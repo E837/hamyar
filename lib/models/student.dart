@@ -1,28 +1,39 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
-class Student {
-  String id;
+import 'package:hamyar/models/group_roll_call.dart';
+import 'package:hamyar/models/roll_call.dart';
+import 'package:hamyar/models/tuition.dart';
+
+class Student with ChangeNotifier {
+  String id = const Uuid().v1();
   Map<String, String> phone;
   String name;
-  String lName;
   DateTime joinDate;
-  String? avatar; // should be in file format
+  List<RollCall> presenceStatus = [];
+  List<Tuition> paymentsStatus = [];
+  List<GroupRollCall> groupsStatus = [];
+  String? avatar; // todo: should be in file format
 
   Student({
-    required this.id,
     required this.phone,
     required this.name,
-    required this.lName,
     required this.joinDate,
     this.avatar,
   });
-}
 
-class Students with ChangeNotifier {
-  final List<Student> _students = [];
+  void addRollCallStat(RollCall newStat) {
+    presenceStatus.add(newStat);
+    notifyListeners();
+  }
 
-  void addStudent(Student student) {
-    _students.add(student);
+  void addPayment(Tuition tuition) {
+    paymentsStatus.add(tuition);
+    notifyListeners();
+  }
+
+  void addGroupStat(GroupRollCall groupStat) {
+    groupsStatus.add(groupStat);
     notifyListeners();
   }
 }

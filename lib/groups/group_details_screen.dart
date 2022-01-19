@@ -27,7 +27,7 @@ class GroupDetailsScreen extends StatelessWidget {
     // final deviceSize = MediaQuery.of(context).size;
     String listTheNames() {
       String memberNames = '';
-      for (var student in students) {
+      for (var student in studentNames) {
         memberNames += '$student / ';
       }
       return memberNames.substring(0, memberNames.length - 3);
