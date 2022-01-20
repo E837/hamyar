@@ -24,7 +24,7 @@ List<String> studentNames = [
   'Willie Sykes',
 ];
 
-List<Student> students = [
+List<Student> studentsList = [
   Student(
     phone: {'mobile': '09123456789'},
     name: 'Alice Wilkerson',

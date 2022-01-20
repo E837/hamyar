@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+
+import 'package:hamyar/models/student.dart';
 import 'package:hamyar/overal_widgets/contact_buttons.dart';
 
 class StudentDetailsScreen extends StatelessWidget {
   final MaterialColor color;
+  final Student student;
+
   const StudentDetailsScreen({
     Key? key,
     required this.color,
+    required this.student,
   }) : super(key: key);
 
   @override
@@ -18,7 +23,7 @@ class StudentDetailsScreen extends StatelessWidget {
       child: Builder(
         builder: (context) => Scaffold(
           appBar: AppBar(
-            title: const Text('student\'s details'),
+            title: Text(student.name),
           ),
           body: ListView(
             children: [

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hamyar/models/students.dart';
+import 'package:provider/provider.dart';
 
 import 'package:hamyar/main_menu.dart';
 import 'package:hamyar/notes/notes_screen.dart';
@@ -17,22 +19,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Hamyar',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        // brightness: Brightness.dark,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Students()),
+      ],
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Hamyar',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          // brightness: Brightness.dark,
+        ),
+        home: const MainMenu(),
+        routes: {
+          StudentsScreen.routeName: (ctx) => const StudentsScreen(),
+          RollCallScreen.routeName: (ctx) => const RollCallScreen(),
+          TuitionScreen.routeName: (ctx) => const TuitionScreen(),
+          NotesScreen.routeName: (ctx) => const NotesScreen(),
+          GeneralInfoScreen.routeName: (ctx) => const GeneralInfoScreen(),
+          GroupsScreen.routeName: (ctx) => const GroupsScreen(),
+        },
       ),
-      home: const MainMenu(),
-      routes: {
-        StudentsScreen.routeName: (ctx) => const StudentsScreen(),
-        RollCallScreen.routeName: (ctx) => const RollCallScreen(),
-        TuitionScreen.routeName: (ctx) => const TuitionScreen(),
-        NotesScreen.routeName: (ctx) => const NotesScreen(),
-        GeneralInfoScreen.routeName: (ctx) => const GeneralInfoScreen(),
-        GroupsScreen.routeName: (ctx) => const GroupsScreen(),
-      },
     );
   }
 }
