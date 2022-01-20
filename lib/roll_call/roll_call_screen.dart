@@ -18,22 +18,37 @@ class RollCallScreen extends StatelessWidget {
       data: ThemeData(
         primarySwatch: color,
       ),
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              TitleBar(
-                title: title,
-                hasBackOption: true,
-                buttons: {
-                  Icons.settings: () {},
-                  Icons.crop: () {},
-                  Icons.person: () {},
-                },
-              ),
-              const SizedBox(height: 20),
-              const Expanded(child: RollCallGrid()),
-            ],
+      child: Builder(
+        builder: (context) => Scaffold(
+          body: SafeArea(
+            child: Column(
+              children: [
+                TitleBar(
+                  title: title,
+                  hasBackOption: true,
+                  buttons: {
+                    Icons.today: () {},
+                    Icons.restart_alt: () {},
+                    Icons.done_all: () {},
+                  },
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Date: Today',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primaryVariant,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Expanded(child: RollCallGrid()),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.done_outline),
           ),
         ),
       ),

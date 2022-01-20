@@ -37,7 +37,7 @@ List<Student> studentsList = [
   ),
   Student(
     phone: {'mobile': '09123456789'},
-    name: 'Cain Guy',
+    name: 'Cain Guyyyyyyyyyyyyyyyyyyyyyyyy',
     joinDate: DateTime.now(),
   ),
 ];

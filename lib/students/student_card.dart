@@ -30,7 +30,10 @@ class StudentCard extends StatelessWidget {
                 size: 80,
               ),
             ),
-            Text(student.name),
+            Text(
+              student.name,
+              textAlign: TextAlign.center,
+            ),
             const ContactButtons(),
           ],
         ),
