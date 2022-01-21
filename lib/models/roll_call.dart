@@ -1,11 +1,9 @@
 class RollCall {
-  String studentId;
   DateTime date;
-  bool presence;
+  bool status;
 
   RollCall({
-    required this.studentId,
     required this.date,
-    required this.presence,
+    required this.status,
   });
 }
