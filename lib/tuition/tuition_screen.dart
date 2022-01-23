@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:hamyar/overal_widgets/title_bar.dart';
 import 'package:hamyar/tuition/tuition_grid.dart';
+import 'package:hamyar/models/date.dart';
 
-class TuitionScreen extends StatelessWidget {
+class TuitionScreen extends StatefulWidget {
   static const routeName = '/tuition';
   const TuitionScreen({Key? key}) : super(key: key);
+
+  @override
+  State<TuitionScreen> createState() => _TuitionScreenState();
+}
+
+class _TuitionScreenState extends State<TuitionScreen> {
+  DateTime desiredMonth = Date.currentMonth();
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +35,29 @@ class TuitionScreen extends StatelessWidget {
                   title: title,
                   hasBackOption: true,
                   buttons: {
+                    Icons.today: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: desiredMonth,
+                        firstDate: DateTime(2018),
+                        lastDate: Date.currentMonth(),
+                      ).then((pickedMonth) {
+                        setState(() {
+                          desiredMonth = pickedMonth ?? desiredMonth;
+                        });
+                      });
+                    },
                     Icons.settings: () {},
-                    Icons.crop: () {},
-                    Icons.person: () {},
                   },
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Month: ${DateFormat.yMMMM().format(desiredMonth)}',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 const Expanded(

@@ -1,4 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:hamyar/models/student.dart';
 
 class TuitionCard extends StatefulWidget {
   const TuitionCard({Key? key}) : super(key: key);
@@ -11,31 +15,28 @@ class _TuitionCardState extends State<TuitionCard> {
   final TextEditingController controller = TextEditingController();
 
   Widget showMultiplierButton(
-      BuildContext context, String text, double height, double width,
-      {bool isButton = true}) {
+      BuildContext context, Widget widget, double height, double width,
+      {VoidCallback? function}) {
     return GestureDetector(
       child: Container(
         height: height,
         width: width,
         decoration: BoxDecoration(
-          borderRadius:
-              isButton ? BorderRadius.circular(30) : BorderRadius.circular(5),
+          borderRadius: function != null
+              ? BorderRadius.circular(30)
+              : BorderRadius.circular(5),
           color: Theme.of(context).colorScheme.primary,
         ),
         alignment: Alignment.center,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Theme.of(context).canvasColor,
-          ),
-        ),
+        child: widget,
       ),
-      onTap: () {},
+      onTap: function,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final student = Provider.of<Student>(context, listen: false);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -60,10 +61,11 @@ class _TuitionCardState extends State<TuitionCard> {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  const Expanded(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text('Student\'s name'),
+                  Expanded(
+                    child: AutoSizeText(
+                      student.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -73,22 +75,36 @@ class _TuitionCardState extends State<TuitionCard> {
                 children: [
                   showMultiplierButton(
                     context,
-                    '3x',
+                    Icon(
+                      Icons.restart_alt,
+                      color: Theme.of(context).cardColor,
+                      size: 18,
+                    ),
                     constraints.maxHeight * 0.2,
                     constraints.maxHeight * 0.2,
+                    function: () {},
                   ),
                   showMultiplierButton(
                     context,
-                    '1x',
+                    Icon(
+                      Icons.done_all,
+                      color: Theme.of(context).cardColor,
+                      size: 18,
+                    ),
                     constraints.maxHeight * 0.2,
                     constraints.maxHeight * 0.2,
+                    function: () {},
                   ),
                   showMultiplierButton(
                     context,
-                    '65 \$',
+                    Text(
+                      '65 \$',
+                      style: TextStyle(
+                        color: Theme.of(context).cardColor,
+                      ),
+                    ),
                     constraints.maxHeight * 0.2,
                     constraints.maxWidth * 0.4,
-                    isButton: false,
                   ),
                 ],
               ),
@@ -120,7 +136,7 @@ class _TuitionCardState extends State<TuitionCard> {
                     gapPadding: 0,
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                  hintText: 'Sum appears here',
+                  hintText: 'You can type here',
                   hintStyle: const TextStyle(
                     fontSize: 12,
                   ),

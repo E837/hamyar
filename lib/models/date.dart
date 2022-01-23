@@ -1,6 +1,11 @@
 class Date {
+  static final _today = DateTime.now();
+
   static DateTime now() {
-    final now = DateTime.now();
-    return DateTime(now.year, now.month, now.day);
+    return DateTime(_today.year, _today.month, _today.day);
+  }
+
+  static DateTime currentMonth() {
+    return DateTime(_today.year, _today.month, 1);
   }
 }
