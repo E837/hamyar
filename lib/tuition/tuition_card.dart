@@ -1,8 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
+import 'package:hamyar/models/tuition.dart';
 import 'package:hamyar/models/student.dart';
+import 'package:hamyar/models/students.dart';
 
 class TuitionCard extends StatefulWidget {
   const TuitionCard({Key? key}) : super(key: key);
@@ -13,6 +15,9 @@ class TuitionCard extends StatefulWidget {
 
 class _TuitionCardState extends State<TuitionCard> {
   final TextEditingController controller = TextEditingController();
+  Students? studentsData;
+  Student? student;
+  Color? cardColor;
 
   Widget showMultiplierButton(
       BuildContext context, Widget widget, double height, double width,
@@ -34,10 +39,68 @@ class _TuitionCardState extends State<TuitionCard> {
     );
   }
 
+  void textListener() {
+    // writing data on the provider
+    final paymentAmount = double.tryParse(controller.text) ?? 0;
+    student?.setPayment(Tuition(
+      date: studentsData!.desiredMonthForPayment,
+      paymentAmount: paymentAmount,
+      requiredAmount: 65,
+    ));
+    for (var payment in student!.paymentsStatus) {
+      print('date: ${payment.date}, amount: ${payment.paymentAmount}');
+    }
+    // changing the card color
+    if (paymentAmount > 0) {
+      //todo: dynamic theming should be implemented there
+      setState(() {
+        cardColor = Colors.red.shade100;
+      });
+    } else {
+      setState(() {
+        cardColor = Theme.of(context).cardColor;
+      });
+    }
+    // avoiding non-numeric input
+    if (double.tryParse(controller.text) == null && controller.text != '') {
+      controller.text =
+          controller.text.substring(0, controller.text.length - 1);
+      // moving the cursor to the end of the line
+      // so user can continue typing without any issues
+      controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: controller.text.length));
+    }
+  }
+
+  @override
+  void initState() {
+    print('card init');
+    controller.addListener(textListener);
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    studentsData = Provider.of<Students>(context);
+    student = Provider.of<Student>(context, listen: false);
+    final initialAmount =
+        student!.getPaymentData(studentsData!.desiredMonthForPayment);
+    controller.text = initialAmount == 0 ? '' : initialAmount.toString();
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(textListener);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final student = Provider.of<Student>(context, listen: false);
+    print('card build');
+    print('------------');
     return Card(
+      color: cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -63,7 +126,7 @@ class _TuitionCardState extends State<TuitionCard> {
                   ),
                   Expanded(
                     child: AutoSizeText(
-                      student.name,
+                      student!.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -82,7 +145,9 @@ class _TuitionCardState extends State<TuitionCard> {
                     ),
                     constraints.maxHeight * 0.2,
                     constraints.maxHeight * 0.2,
-                    function: () {},
+                    function: () {
+                      controller.text = '';
+                    },
                   ),
                   showMultiplierButton(
                     context,
@@ -93,7 +158,9 @@ class _TuitionCardState extends State<TuitionCard> {
                     ),
                     constraints.maxHeight * 0.2,
                     constraints.maxHeight * 0.2,
-                    function: () {},
+                    function: () {
+                      controller.text = '65';
+                    },
                   ),
                   showMultiplierButton(
                     context,

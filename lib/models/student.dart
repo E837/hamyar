@@ -23,6 +23,8 @@ class Student with ChangeNotifier {
     this.avatar,
   });
 
+  // ----------------- roll-call -----------------
+
   void _addRollCallStat(RollCall newStat) {
     presenceStatus.add(newStat);
     notifyListeners();
@@ -55,13 +57,46 @@ class Student with ChangeNotifier {
     notifyListeners();
   }
 
-  void addPayment(Tuition tuition) {
-    paymentsStatus.add(tuition);
-    notifyListeners();
+  // ----------------- tuition -----------------
+
+  List<DateTime> get _paymentDates =>
+      paymentsStatus.map((e) => e.date).toList();
+
+  int findPaymentByDate(DateTime date) {
+    return paymentsStatus.indexWhere((tuition) => tuition.date == date);
   }
 
-  void addGroupStat(GroupRollCall groupStat) {
-    groupsStatus.add(groupStat);
-    notifyListeners();
+  void _addPayment(Tuition tuition) {
+    paymentsStatus.add(tuition);
+    // notifyListeners();
   }
+
+  void _modifyPayment(Tuition tuition) {
+    final index = findPaymentByDate(tuition.date);
+    paymentsStatus[index] = tuition;
+    // notifyListeners();
+  }
+
+  void setPayment(Tuition tuition) {
+    if (_paymentDates.contains(tuition.date)) {
+      _modifyPayment(tuition);
+    } else {
+      _addPayment(tuition);
+    }
+  }
+
+  double getPaymentData(DateTime date) {
+    final index = findPaymentByDate(date);
+    if (index >= 0) {
+      return paymentsStatus[index].paymentAmount;
+    }
+    return 0;
+  }
+
+  // ----------------- groups -----------------
+
+  // void addGroupStat(GroupRollCall groupStat) {
+  //   groupsStatus.add(groupStat);
+  //   notifyListeners();
+  // }
 }

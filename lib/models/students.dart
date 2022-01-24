@@ -8,16 +8,19 @@ import 'package:hamyar/models/date.dart';
 class Students with ChangeNotifier {
   final List<Student> _students = studentsList;
   DateTime desiredDateForRollCall = Date.now();
+  DateTime desiredMonthForPayment = Date.currentMonth();
 
   List<Student> get students => _students;
-
-  void resetDesiredDate() {
-    desiredDateForRollCall = Date.now();
-  }
 
   void addStudent(Student student) {
     _students.add(student);
     notifyListeners();
+  }
+
+  // ----------------- roll-call -----------------
+
+  void resetDesiredDate() {
+    desiredDateForRollCall = Date.now();
   }
 
   void resetRollCall(DateTime date) {
@@ -53,5 +56,16 @@ class Students with ChangeNotifier {
     for (var student in students) {
       student.setInitRollCall(date);
     }
+  }
+
+  // ----------------- tuition -----------------
+
+  void setDesiredMonth(DateTime date) {
+    desiredMonthForPayment = date;
+    notifyListeners();
+  }
+
+  void resetDesiredMonth() {
+    desiredMonthForPayment = Date.currentMonth();
   }
 }
