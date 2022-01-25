@@ -56,7 +56,10 @@ class _RollCallScreenState extends State<RollCallScreen> {
                         lastDate: Date.now(),
                       ).then((pickedDate) {
                         setState(() {
-                          desiredDate = pickedDate ?? Date.now();
+                          if (pickedDate != null) {
+                            studentsData?.removeIfAllAbsent(desiredDate);
+                          }
+                          desiredDate = pickedDate ?? desiredDate;
                           studentsData?.desiredDateForRollCall = desiredDate;
                         });
                       });

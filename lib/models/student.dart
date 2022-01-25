@@ -93,6 +93,16 @@ class Student with ChangeNotifier {
     return 0;
   }
 
+  void setInitPayment(DateTime date, double requiredAmount) {
+    if (!_paymentDates.contains(date)) {
+      _addPayment(Tuition(
+        date: date,
+        paymentAmount: 0,
+        requiredAmount: requiredAmount,
+      ));
+    }
+  }
+
   // ----------------- groups -----------------
 
   // void addGroupStat(GroupRollCall groupStat) {

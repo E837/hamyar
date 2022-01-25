@@ -39,16 +39,23 @@ class _TuitionCardState extends State<TuitionCard> {
     );
   }
 
+  bool validate(String value) {
+    final parsed = double.tryParse(value);
+    if (parsed != null && parsed > studentsData!.requiredAmount) {
+      return false;
+    }
+    return true;
+  }
+
   void textListener() {
-    // writing data on the provider
     final paymentAmount = double.tryParse(controller.text) ?? 0;
-    student?.setPayment(Tuition(
-      date: studentsData!.desiredMonthForPayment,
-      paymentAmount: paymentAmount,
-      requiredAmount: 65,
-    ));
-    for (var payment in student!.paymentsStatus) {
-      print('date: ${payment.date}, amount: ${payment.paymentAmount}');
+    // writing data on the provider
+    if (validate(controller.text)) {
+      student?.setPayment(Tuition(
+        date: studentsData!.desiredMonthForPayment,
+        paymentAmount: paymentAmount,
+        requiredAmount: studentsData!.requiredAmount,
+      ));
     }
     // changing the card color
     if (paymentAmount > 0) {
@@ -74,7 +81,6 @@ class _TuitionCardState extends State<TuitionCard> {
 
   @override
   void initState() {
-    print('card init');
     controller.addListener(textListener);
     super.initState();
   }
@@ -97,8 +103,6 @@ class _TuitionCardState extends State<TuitionCard> {
 
   @override
   Widget build(BuildContext context) {
-    print('card build');
-    print('------------');
     return Card(
       color: cardColor,
       shape: RoundedRectangleBorder(
@@ -159,13 +163,13 @@ class _TuitionCardState extends State<TuitionCard> {
                     constraints.maxHeight * 0.2,
                     constraints.maxHeight * 0.2,
                     function: () {
-                      controller.text = '65';
+                      controller.text = studentsData!.requiredAmount.toString();
                     },
                   ),
                   showMultiplierButton(
                     context,
                     Text(
-                      '65 \$',
+                      '${studentsData!.requiredAmount} \$',
                       style: TextStyle(
                         color: Theme.of(context).cardColor,
                       ),
@@ -202,11 +206,18 @@ class _TuitionCardState extends State<TuitionCard> {
                     ),
                     gapPadding: 0,
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                  hintText: 'You can type here',
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: validate(controller.text) ? 14 : 7,
+                  ),
+                  hintText: 'Type here (numbers only)',
                   hintStyle: const TextStyle(
                     fontSize: 12,
                   ),
+                  isCollapsed: true,
+                  errorText: validate(controller.text)
+                      ? null
+                      : 'Error! More than enough',
                 ),
                 keyboardType: TextInputType.number,
               ),

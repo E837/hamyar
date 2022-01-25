@@ -15,7 +15,7 @@ class TuitionGrid extends StatelessWidget {
         maxCrossAxisExtent: 250,
         mainAxisSpacing: 5,
         crossAxisSpacing: 3,
-        childAspectRatio: 4 / 3,
+        childAspectRatio: 5 / 4,
       ),
       itemBuilder: (context, index) => ChangeNotifierProvider.value(
         value: students[index],
