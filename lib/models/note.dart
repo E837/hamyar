@@ -1,16 +1,31 @@
-class Note {
-  String title;
-  String content;
-  DateTime modificationDate = DateTime.now();
+import 'package:flutter/cupertino.dart';
+
+class Note with ChangeNotifier {
+  String _title;
+  String _content;
+  final DateTime _modificationDate;
 
   Note({
-    required this.title,
-    required this.content,
-  });
+    required title,
+    required content,
+    DateTime? modificationDate,
+  })  : _title = title,
+        _content = content,
+        _modificationDate = modificationDate ?? DateTime.now();
 
-  void modify(String title, String content) {
-    this.title = title;
-    this.content = content;
-    modificationDate = DateTime.now();
+  String get title => _title;
+
+  set title(String value) {
+    _title = value;
+    notifyListeners();
   }
+
+  String get content => _content;
+
+  set content(String value) {
+    _content = value;
+    notifyListeners();
+  }
+
+  DateTime get modificationDate => _modificationDate;
 }

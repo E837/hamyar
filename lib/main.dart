@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hamyar/models/students.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hamyar/main_menu.dart';
@@ -9,6 +8,8 @@ import 'package:hamyar/students/students_screen.dart';
 import 'package:hamyar/tuition/tuition_screen.dart';
 import 'package:hamyar/general_info/general_info_screen.dart';
 import 'package:hamyar/groups/groups_screen.dart';
+import 'package:hamyar/models/notes.dart';
+import 'package:hamyar/models/students.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Students()),
+        ChangeNotifierProvider(create: (_) => Notes()),
       ],
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,

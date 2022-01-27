@@ -82,8 +82,7 @@ class _TuitionScreenState extends State<TuitionScreen> {
                             top: 26.0,
                             right: 16.0,
                             left: 16.0,
-                            bottom:
-                                MediaQuery.of(context).viewInsets.bottom + 16,
+                            bottom: MediaQuery.of(ctx).viewInsets.bottom + 16,
                           ),
                           child: SingleChildScrollView(
                             child: Column(

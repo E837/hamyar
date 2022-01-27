@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:hamyar/notes/note_fields.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
-class NoteItem extends StatelessWidget {
+import 'package:hamyar/models/note.dart';
+import 'package:hamyar/models/notes.dart';
+
+class NoteItem extends StatefulWidget {
   const NoteItem({Key? key}) : super(key: key);
 
   @override
+  State<NoteItem> createState() => _NoteItemState();
+}
+
+class _NoteItemState extends State<NoteItem> {
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+
+  @override
+  void initState() {
+    final note = Provider.of<Note>(context, listen: false);
+    titleController.text = note.title;
+    contentController.text = note.content;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final notesData = Provider.of<Notes>(context);
+    final note = Provider.of<Note>(context);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -30,23 +54,25 @@ class NoteItem extends StatelessWidget {
                           color: Theme.of(context).colorScheme.primary,
                         ),
                         const SizedBox(width: 5),
-                        const Text(
-                          'Note\'s title',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                        Expanded(
+                          child: Text(
+                            note.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        const Spacer(),
-                        const Text('01/12/22'),
+                        const SizedBox(width: 20),
+                        Text(DateFormat.yMMMd().format(note.modificationDate)),
                       ],
                     ),
                     Divider(
                       endIndent: constraints.maxWidth * 0.6,
                     ),
-                    const Text(
-                      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem.Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem.',
-                      // 'Lorem ipsum',
+                    Text(
+                      note.content,
                       overflow: TextOverflow.fade,
                       maxLines: 6,
                     ),
@@ -69,11 +95,26 @@ class NoteItem extends StatelessWidget {
                     color: Theme.of(context).canvasColor,
                   ),
                 ),
-                onTap: () {},
-              )
+                onTap: () {
+                  notesData.remove(context, note);
+                },
+              ),
             ],
           ),
-          onTap: () {},
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(40),
+                ),
+              ),
+              builder: (ctx) => NoteFields(
+                note: note,
+              ),
+            ).then((value) => notesData.removeIfEmpty(context));
+          },
         ),
       ),
     );
