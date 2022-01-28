@@ -10,7 +10,9 @@ class RollCallGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final students = Provider.of<Students>(context, listen: false).students;
+    final studentsData = Provider.of<Students>(context);
+    final students = studentsData
+        .studentsFilteredByDate(studentsData.desiredDateForRollCall);
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 100,

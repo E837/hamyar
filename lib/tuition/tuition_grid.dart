@@ -9,7 +9,9 @@ class TuitionGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final students = Provider.of<Students>(context).students;
+    final studentsData = Provider.of<Students>(context);
+    final students = studentsData
+        .studentsFilteredByDate(studentsData.desiredMonthForPayment);
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 250,

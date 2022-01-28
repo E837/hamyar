@@ -23,7 +23,7 @@ class Student with ChangeNotifier {
     required this.phone,
     this.avatar,
     DateTime? joinDate,
-  }) : joinDate = joinDate ?? DateTime.now();
+  }) : joinDate = joinDate ?? Date.now();
 
   // ----------------- student -----------------
 

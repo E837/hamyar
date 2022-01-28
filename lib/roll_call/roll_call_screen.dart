@@ -65,10 +65,10 @@ class _RollCallScreenState extends State<RollCallScreen> {
                       });
                     },
                     Icons.restart_alt: () {
-                      studentsData?.resetRollCall(desiredDate);
+                      studentsData?.resetRollCall();
                     },
                     Icons.done_all: () {
-                      studentsData?.checkAllRollCall(desiredDate);
+                      studentsData?.checkAllRollCall();
                     },
                   },
                 ),
