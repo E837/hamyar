@@ -1,6 +1,6 @@
 import 'models/student.dart';
-import 'models/date.dart';
 import 'models/note.dart';
+import 'models/phone_number.dart';
 
 List<String> studentNames = [
   'Alice Wilkerson',
@@ -28,19 +28,19 @@ List<String> studentNames = [
 
 List<Student> studentsList = [
   Student(
-    phone: {'mobile': '09123456789'},
+    phone: [PhoneNumber(type: PhoneType.main, number: '0912345678')],
     name: 'Alice Wilkerson',
-    joinDate: Date.now(),
+    joinDate: DateTime(2021, 11, 1),
   ),
   Student(
-    phone: {'mobile': '09123456789'},
+    phone: [PhoneNumber(type: PhoneType.main, number: '0912345678')],
     name: 'Fynn Chambers',
-    joinDate: Date.now(),
+    joinDate: DateTime(2021, 12, 1),
   ),
   Student(
-    phone: {'mobile': '09123456789'},
+    phone: [PhoneNumber(type: PhoneType.main, number: '0912345678')],
     name: 'Cain Guyyyyyyyyyyyyyyyyyyyyyyyy',
-    joinDate: Date.now(),
+    joinDate: DateTime(2022, 1, 1),
   ),
 ];
 

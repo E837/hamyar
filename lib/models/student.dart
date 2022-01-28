@@ -5,23 +5,27 @@ import 'package:hamyar/models/group_roll_call.dart';
 import 'package:hamyar/models/roll_call.dart';
 import 'package:hamyar/models/tuition.dart';
 import 'package:hamyar/models/date.dart';
+import 'package:hamyar/models/phone_number.dart';
 
 class Student with ChangeNotifier {
   String id = const Uuid().v1();
-  Map<String, String> phone;
   String name;
+  List<PhoneNumber> phone;
   DateTime joinDate;
+  DateTime? leaveDate;
   List<RollCall> presenceStatus = [];
   List<Tuition> paymentsStatus = [];
   List<GroupRollCall> groupsStatus = [];
   String? avatar; // todo: should be in file format
 
   Student({
-    required this.phone,
     required this.name,
-    required this.joinDate,
+    required this.phone,
     this.avatar,
-  });
+    DateTime? joinDate,
+  }) : joinDate = joinDate ?? DateTime.now();
+
+  // ----------------- student -----------------
 
   // ----------------- roll-call -----------------
 

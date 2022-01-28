@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:hamyar/models/roll_call.dart';
 import 'package:hamyar/models/tuition.dart';
@@ -11,6 +11,8 @@ class Students with ChangeNotifier {
   DateTime desiredDateForRollCall = Date.now();
   DateTime desiredMonthForPayment = Date.currentMonth();
   double _requiredAmount = 50;
+
+  // ----------------- students -----------------
 
   List<Student> get students => _students;
 
@@ -92,7 +94,6 @@ class Students with ChangeNotifier {
           .firstWhere((tuition) => tuition.date == desiredMonthForPayment)
           .requiredAmount;
     }
-    // todo: required amount can be changed only once (shouldn't be like this - fix it)
     for (var student in students) {
       student.setInitPayment(date, _requiredAmount);
     }

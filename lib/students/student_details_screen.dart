@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hamyar/models/student.dart';
 import 'package:hamyar/overal_widgets/contact_buttons.dart';
+import 'package:hamyar/models/phone_number.dart';
 
 class StudentDetailsScreen extends StatelessWidget {
   final MaterialColor color;
@@ -39,8 +40,8 @@ class StudentDetailsScreen extends StatelessWidget {
                   // todo: set a button here to add image from gallery or camera
                 ),
               ),
-              const Text(
-                'student\'s name',
+              Text(
+                student.joinDate.toString(),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: deviceSize.height * 0.02),
@@ -48,6 +49,14 @@ class StudentDetailsScreen extends StatelessWidget {
                 children: const [
                   Text('last presence: 4th of January'),
                   Text('last payment: 1st of December'),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Column(
+                children: [
+                  for (var phoneNumber in student.phone)
+                    Text(
+                        '${PhoneNumber.typeToString(phoneNumber.type)} : ${phoneNumber.number}')
                 ],
               ),
               Container(

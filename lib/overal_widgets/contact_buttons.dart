@@ -32,7 +32,7 @@ class ContactButtons extends StatelessWidget {
           child: const CircleAvatar(
             radius: 12,
             child: Icon(
-              Icons.send,
+              Icons.location_on,
               size: 14,
             ),
           ),

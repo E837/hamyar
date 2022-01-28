@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         ),
         home: const MainMenu(),
         routes: {
-          StudentsScreen.routeName: (ctx) => const StudentsScreen(),
+          StudentsScreen.routeName: (ctx) => StudentsScreen(),
           RollCallScreen.routeName: (ctx) => const RollCallScreen(),
           TuitionScreen.routeName: (ctx) => const TuitionScreen(),
           NotesScreen.routeName: (ctx) => const NotesScreen(),
