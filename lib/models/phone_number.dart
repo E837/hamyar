@@ -12,22 +12,18 @@ class PhoneNumber {
   PhoneNumber({required this.type, required this.number});
 
   static String typeToString(PhoneType type) {
-    switch (type) {
-      case PhoneType.main:
-        return 'Main';
-      case PhoneType.mobile:
-        return 'Mobile';
-      case PhoneType.work:
-        return 'Work';
-      case PhoneType.home:
-        return 'Home';
-    }
+    final s = type.toString();
+    // s content is like "PhoneType.main" so we need only the "main" part
+    return s.substring(s.indexOf('.') + 1);
   }
 
-  static List<String> phoneTypeItems() {
-    final List<String> result = [];
+  static List<PhoneType> phoneTypeItems({bool includeMain = true}) {
+    final List<PhoneType> result = [];
     for (var type in PhoneType.values) {
-      result.add(typeToString(type));
+      result.add(type);
+    }
+    if (!includeMain) {
+      result.removeAt(0);
     }
     return result;
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quiver/iterables.dart';
 
 import 'package:hamyar/models/student.dart';
 import 'package:hamyar/models/students.dart';
@@ -16,12 +17,17 @@ class StudentFields extends StatefulWidget {
 class _StudentFieldsState extends State<StudentFields> {
   final nameController = TextEditingController();
   final List<TextEditingController> phoneControllers = [];
+  final List<PhoneType> phoneTypes = [];
   bool wannaValidate = false;
 
   List<PhoneNumber> get phoneNumbers {
     final List<PhoneNumber> result = [];
-    for (var e in phoneControllers) {
-      result.add(PhoneNumber(type: PhoneType.main, number: e.text));
+    for (var pair in zip([phoneTypes, phoneControllers])) {
+      result.add(
+        PhoneNumber(
+            type: pair[0] as PhoneType,
+            number: (pair[1] as TextEditingController).text),
+      );
     }
     result.removeWhere((element) => element.number == '');
     return result;
@@ -59,6 +65,7 @@ class _StudentFieldsState extends State<StudentFields> {
               ),
               PhoneNumberField(
                 controllers: phoneControllers,
+                phoneTypes: phoneTypes,
               ),
               const SizedBox(height: 10),
               ElevatedButton(
