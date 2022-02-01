@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 
 class MyLineChart extends StatelessWidget {
   final List<FlSpot> spots;
@@ -28,7 +29,24 @@ class MyLineChart extends StatelessWidget {
           topTitles: SideTitles(),
           rightTitles: SideTitles(),
           leftTitles: SideTitles(),
+          bottomTitles: SideTitles(
+            showTitles: true,
+            getTextStyles: (ctx, i) => const TextStyle(
+              fontSize: 10,
+            ),
+            getTitles: (i) {
+              return DateFormat.MMM().format(
+                DateTime(DateTime.now().year, DateTime.now().month - i.toInt()),
+              );
+            },
+            reservedSize: 5,
+          ),
         ),
+        axisTitleData: FlAxisTitleData(
+            leftTitle: AxisTitle(
+          showTitle: true,
+          titleText: 'percent',
+        )),
         lineBarsData: [
           LineChartBarData(
             isCurved: true,

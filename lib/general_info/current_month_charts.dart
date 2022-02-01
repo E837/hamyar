@@ -39,9 +39,12 @@ class CurrentMonthCharts extends StatelessWidget {
         ),
         Column(
           children: [
-            CircleAvatar(
-              radius: deviceSize.height * 0.08,
-              child: const Text('chart'),
+            SizedBox(
+              width: deviceSize.height * 0.16,
+              height: deviceSize.height * 0.16,
+              child: MyPieChart(
+                fillPercent: getTuAvgOfAllForMonth(studentsData),
+              ),
             ),
             const SizedBox(height: 10),
             const Text('Payments'),

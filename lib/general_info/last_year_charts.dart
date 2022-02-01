@@ -30,24 +30,35 @@ class LastYearCharts extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(20),
             ),
+            padding: const EdgeInsets.all(14.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: MyLineChart(
-                      spots: getPrStatOfYearForAllInSpots(studentsData),
-                    ),
+                Text(
+                  'roll-calls',
+                  style: TextStyle(
+                    color: Theme.of(context).canvasColor,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 10),
                 Expanded(
-                  child: Text(
-                    'payments chart',
-                    style: TextStyle(
-                      color: Theme.of(context).canvasColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: MyLineChart(
+                    spots: getPrStatOfYearForAllInSpots(studentsData),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: MyLineChart(
+                    spots: getTuStatOfYearForAllInSpots(studentsData),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'payments',
+                  style: TextStyle(
+                    color: Theme.of(context).canvasColor,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
