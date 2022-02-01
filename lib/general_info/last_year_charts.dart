@@ -47,7 +47,7 @@ class LastYearCharts extends StatelessWidget {
                     spots: getPrStatOfYearForAllInSpots(studentsData),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const Divider(height: 20),
                 Expanded(
                   child: MyLineChart(
                     spots: getTuStatOfYearForAllInSpots(studentsData),

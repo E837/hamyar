@@ -36,7 +36,9 @@ class MyLineChart extends StatelessWidget {
             ),
             getTitles: (i) {
               return DateFormat.MMM().format(
-                DateTime(DateTime.now().year, DateTime.now().month - i.toInt()),
+                DateTime(DateTime.now().year,
+                    DateTime.now().month - (spots.length - 1 - i.toInt())),
+                // it's like what we have done on "chart_helper.dart(FlSpot functions)" - and that "-1" is because length is always 1 more than index
               );
             },
             reservedSize: 5,
