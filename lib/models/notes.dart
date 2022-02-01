@@ -40,7 +40,7 @@ class Notes with ChangeNotifier {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text(
-          'Empty note discarded',
+          'Note deleted successfully',
           textAlign: TextAlign.center,
         ),
         action: SnackBarAction(
