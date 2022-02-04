@@ -10,6 +10,7 @@ import 'package:hamyar/general_info/general_info_screen.dart';
 import 'package:hamyar/groups/groups_screen.dart';
 import 'package:hamyar/models/notes.dart';
 import 'package:hamyar/models/students.dart';
+import 'package:hamyar/website/website_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
           NotesScreen.routeName: (ctx) => const NotesScreen(),
           GeneralInfoScreen.routeName: (ctx) => const GeneralInfoScreen(),
           GroupsScreen.routeName: (ctx) => const GroupsScreen(),
+          WebsiteScreen.routeName: (ctx) => const WebsiteScreen(),
         },
       ),
     );

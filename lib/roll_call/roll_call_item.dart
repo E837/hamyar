@@ -38,10 +38,11 @@ class _RollCallItemState extends State<RollCallItem> {
         child: Padding(
           padding: const EdgeInsets.all(3.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Icon(
                 checked ? Icons.file_download_done : Icons.account_circle,
-                size: 40,
+                size: 35,
                 color: checked
                     ? Colors.green
                     : Theme.of(context).colorScheme.primary,

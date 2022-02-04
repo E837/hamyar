@@ -8,6 +8,7 @@ import 'package:hamyar/tuition/tuition_screen.dart';
 import 'package:hamyar/general_info/general_info_screen.dart';
 import 'package:hamyar/notes/notes_screen.dart';
 import 'package:hamyar/groups/groups_screen.dart';
+import 'package:hamyar/website/website_screen.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -16,25 +17,22 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              TitleBar(
-                title: 'Hamyar',
-                hasBackOption: false,
-                buttons: {
-                  Icons.dark_mode: () {},
-                  Icons.menu: () {},
-                  Icons.add: () {},
-                  Icons.delete: () {},
-                },
-              ),
-              const Expanded(
-                child: MenuItems(),
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            TitleBar(
+              title: 'Hamyar',
+              hasBackOption: false,
+              buttons: {
+                Icons.dark_mode: () {},
+                Icons.menu: () {},
+                Icons.add: () {},
+                Icons.delete: () {},
+              },
+            ),
+            const Expanded(
+              child: MenuItems(),
+            ),
+          ],
         ),
       ),
     );
@@ -47,9 +45,9 @@ class MenuItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 8,
-        vertical: MediaQuery.of(context).size.height * 0.05,
+        // vertical: MediaQuery.of(context).size.height * 0.05,
       ),
       children: [
         Row(
@@ -103,6 +101,12 @@ class MenuItems extends StatelessWidget {
           title: 'Groups',
           icon: Icons.groups,
           route: GroupsScreen.routeName,
+        ),
+        const MenuItem(
+          color: Colors.pink,
+          title: 'Website',
+          icon: Icons.groups,
+          route: WebsiteScreen.routeName,
         ),
       ],
     );
