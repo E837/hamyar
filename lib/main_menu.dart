@@ -24,9 +24,9 @@ class MainMenu extends StatelessWidget {
               hasBackOption: false,
               buttons: {
                 Icons.dark_mode: () {},
-                Icons.menu: () {},
-                Icons.add: () {},
-                Icons.delete: () {},
+                Icons.read_more: () {},
+                Icons.drive_folder_upload: () {},
+                Icons.delete_sweep: () {},
               },
             ),
             const Expanded(

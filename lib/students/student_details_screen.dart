@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:hamyar/models/student.dart';
 import 'package:hamyar/overal_widgets/contact_buttons.dart';
 import 'package:hamyar/models/phone_number.dart';
+import 'package:hamyar/students/my_grid_chart.dart';
 
 class StudentDetailsScreen extends StatelessWidget {
   final MaterialColor color;
@@ -13,6 +15,22 @@ class StudentDetailsScreen extends StatelessWidget {
     required this.color,
     required this.student,
   }) : super(key: key);
+
+  String get lastPresence {
+    return student.presenceStatus.isNotEmpty
+        ? DateFormat.yMEd().format(student.presenceStatus.last.date)
+        : 'has no data yet!';
+  }
+
+  String get lastPayment {
+    if (student.paymentsStatus.isNotEmpty) {
+      return student.paymentsStatus.last.paymentAmount.toString() +
+          '\$, on: ' +
+          DateFormat.MMMM().format(student.paymentsStatus.last.date);
+    } else {
+      return 'has no data yet!';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +43,28 @@ class StudentDetailsScreen extends StatelessWidget {
         builder: (context) => Scaffold(
           appBar: AppBar(
             title: Text(student.name),
+            actions: [
+              PopupMenuButton(
+                icon: const Icon(Icons.more_vert),
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    child: Text('reset student\'s data'),
+                    value: 1,
+                  ),
+                  const PopupMenuItem(
+                    child: Text('remove this student'),
+                    value: 2,
+                  ),
+                ],
+                onSelected: (selectedValue) {
+                  if (selectedValue == 1) {
+                    // todo: reset student
+                  } else if (selectedValue == 2) {
+                    // todo: remove student
+                  }
+                },
+              ),
+            ],
           ),
           body: ListView(
             children: [
@@ -41,14 +81,14 @@ class StudentDetailsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                student.joinDate.toString(),
+                'since: ' + DateFormat.yMMMd().format(student.joinDate),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: deviceSize.height * 0.02),
               Column(
-                children: const [
-                  Text('last presence: 4th of January'),
-                  Text('last payment: 1st of December'),
+                children: [
+                  Text('last presence: $lastPresence'),
+                  Text('last payment: $lastPayment'),
                 ],
               ),
               const SizedBox(height: 10),
@@ -91,22 +131,36 @@ class StudentDetailsScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 150,
                     margin: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Center(child: Text('roll call chart')),
+                    child: MyGridChart(
+                      student: student,
+                      color: color,
+                      type: ChartType.rollCall,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Container(
                     width: double.infinity,
                     height: 150,
                     margin: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Center(child: Text('tuition chart')),
+                    child: MyGridChart(
+                      student: student,
+                      color: color,
+                      type: ChartType.tuition,
+                    ),
                   ),
                 ],
               ),

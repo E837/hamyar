@@ -61,6 +61,10 @@ class Student with ChangeNotifier {
     notifyListeners();
   }
 
+  void sortRollCalls() {
+    presenceStatus.sort((a, b) => b.date.compareTo(a.date));
+  }
+
   // ----------------- tuition -----------------
 
   List<DateTime> get _paymentDates =>
@@ -105,6 +109,10 @@ class Student with ChangeNotifier {
         requiredAmount: requiredAmount,
       ));
     }
+  }
+
+  void sortPayments() {
+    paymentsStatus.sort((a, b) => b.date.compareTo(a.date));
   }
 
   // ----------------- groups -----------------

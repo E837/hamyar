@@ -28,9 +28,8 @@ class GeneralInfoScreen extends StatelessWidget {
                   title: title,
                   hasBackOption: true,
                   buttons: {
-                    Icons.settings: () {},
-                    Icons.crop: () {},
-                    Icons.person: () {},
+                    Icons.sim_card_download: () {},
+                    Icons.share: () {},
                   },
                 ),
                 const SizedBox(height: 20),
